@@ -17,3 +17,17 @@ export const deleteToCart = (pid) => {
     payload: pid,
   };
 };
+
+export const increaseItemInCart = (pid) => {
+  return {
+    type: "INCREASE_ITEM_IN_CART",
+    payload: pid,
+  };
+};
+
+export const decreaseItemInCart = (pid) => {
+  return {
+    type: "DECREASE_ITEM_IN_CART",
+    payload: pid,
+  };
+};

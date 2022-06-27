@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, deleteToCart } from "../../../redux/cart/actions";
+import { addToCart } from "../../../redux/cart/actions";
 import getAllProducts from "../../../redux/product/actions";
 
 function ProductList() {
@@ -11,9 +11,9 @@ function ProductList() {
     dispatch(addToCart(product));
   };
 
-  const addtoWishList = (pid) => {
-    console.log("addtoWishList", pid);
-  };
+  // const addtoWishList = (pid) => {
+  //   console.log("addtoWishList", pid);
+  // };
 
   const productList = useSelector((state) => {
     return state.Products;
@@ -24,7 +24,7 @@ function ProductList() {
 
   const Listing = productList.products.map((product, index) => {
     return (
-      <div className="col-lg-4 col-md-6 col-sm-12 pb-1">
+      <div className="col-lg-4 col-md-6 col-sm-12 pb-1" key={index}>
         <div className="card product-item border-0 mb-4">
           <div className="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
             <img src={product.image} alt={product.title} />

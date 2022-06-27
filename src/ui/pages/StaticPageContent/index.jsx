@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import Header from "../../atoms/Header";
-import Navigation from "../../atoms/Navigation";
 import Footer from "../../atoms/Footer";
 
 function StaticPageContent() {

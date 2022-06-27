@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Header from "../../atoms/Header";
-import Navigation from "../../atoms/Navigation";
-import Footer from "../../atoms/Footer";
 import CartSummary from "../../atoms/CartSummary";
-import { deleteToCart } from "../../../redux/cart/actions";
-import { NotificationContainer } from "react-notifications";
+import {
+  deleteToCart,
+  increaseItemInCart,
+  decreaseItemInCart,
+} from "../../../redux/cart/actions";
 import "react-notifications/lib/notifications.css";
 import Main from "../../pattern/Main";
 
@@ -16,7 +16,7 @@ function Cart() {
   const productList = products.map((product, i) => {
     return (
       <>
-        <tr>
+        <tr key={i}>
           <td className="align-middle">
             <img src={product.image} alt="" style={{ width: "50px" }} />
             {product.title}
@@ -28,7 +28,11 @@ function Cart() {
               style={{ width: "100px" }}
             >
               <div className="input-group-btn">
-                <button className="btn btn-sm btn-primary btn-minus">
+                <button
+                  className="btn btn-sm btn-primary btn-minus"
+                  data-product={product.id}
+                  onClick={() => dispatch(decreaseItemInCart(product.id))}
+                >
                   <i className="fa fa-minus"></i>
                 </button>
               </div>
@@ -38,13 +42,19 @@ function Cart() {
                 value={product.quantity}
               />
               <div className="input-group-btn">
-                <button className="btn btn-sm btn-primary btn-plus">
+                <button
+                  className="btn btn-sm btn-primary btn-plus"
+                  data-product={product.id}
+                  onClick={() => dispatch(increaseItemInCart(product.id))}
+                >
                   <i className="fa fa-plus"></i>
                 </button>
               </div>
             </div>
           </td>
-          <td className="align-middle">${product.price * product.quantity}</td>
+          <td className="align-middle">
+            ${(product.price * product.quantity).toFixed(2)}
+          </td>
           <td className="align-middle">
             <button
               className="btn btn-sm btn-primary"

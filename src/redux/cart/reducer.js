@@ -35,6 +35,26 @@ const Cart = (state = initialState, action) => {
       return { ...state, cart: newCart };
     }
 
+    case "INCREASE_ITEM_IN_CART": {
+      let newCartItems = cart.map((item, id) => {
+        item.id === action.payload && ++item.quantity;
+
+        return item;
+      });
+
+      return { ...state, cart: newCartItems };
+    }
+
+    case "DECREASE_ITEM_IN_CART": {
+      let newCartItems = cart.map((item, id) => {
+        item.id === action.payload && item.quantity >= 1 && --item.quantity;
+
+        return item;
+      });
+
+      return { ...state, cart: newCartItems };
+    }
+
     default: {
       return state;
     }
